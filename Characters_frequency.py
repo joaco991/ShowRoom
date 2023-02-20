@@ -18,7 +18,7 @@ except IOError as e:
 # Working through the file
 
 dict = {}
-numbers = [i for i in range(10)]
+numbers = [str(i) for i in range(10)]
 upper_letters = [i+65 for i in range(26)]
 lower_letters = [i+97 for i in range(26)]
 
@@ -69,6 +69,11 @@ try:
 
                 dict[s_reading] = 1
 
+            s_reading = s_op.read(1)
+            continue
+        
+        else:
+            
             s_reading = s_op.read(1)
             continue
     
