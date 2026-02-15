@@ -1,0 +1,18 @@
+# In this file I will display my learning experience in Data Acquisition Methods.
+
+#First, API requiests from Python into JSON
+#Then, this JSON (list of lists) will be converted into a CSV file
+
+#importing the neccesary modules
+import requests
+import csv
+
+#using data prom Census as the course at Codecademy teaches to request the information
+r = requests.get('https://api.census.gov/data/2020/acs/acs5?get=NAME,B08303_001E,B08303_013E&for=county:*&in=state:36')
+#converting this information into JSON forrmat, could have gone with r.text but JSON works with ' instead of " 
+r_json = r.json()
+
+#converting from JSON to csv file, this file was created at the same directory the file was running from.
+with open('first_file.csv', mode='w', newline='') as file:
+  writer = csv.writer(file)
+  writer.writerows(r_json)
