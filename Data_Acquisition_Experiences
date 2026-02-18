@@ -2,10 +2,12 @@
 
 #First, API requiests from Python into JSON
 #Then, this JSON (list of lists) will be converted into a CSV file
+#Let's convert this file using pandas.
 
 #importing the neccesary modules
 import requests
 import csv
+import pandas
 
 #using data prom Census as the course at Codecademy teaches to request the information
 r = requests.get('https://api.census.gov/data/2020/acs/acs5?get=NAME,B08303_001E,B08303_013E&for=county:*&in=state:36')
@@ -16,3 +18,12 @@ r_json = r.json()
 with open('first_file.csv', mode='w', newline='') as file:
   writer = csv.writer(file)
   writer.writerows(r_json)
+
+#converting the file to usable data through pandas (the import pandas was done in the first section of the code)
+census_df = pandas.read_csv('first_file.csv')
+
+#checking headers and renaming columns, and checking again
+#print(census_df.head())
+
+census_df.columns = ['name', 'total_commuters', '90_mins_plus_commuters', 'state', 'county']
+#print(commute_df.head())
